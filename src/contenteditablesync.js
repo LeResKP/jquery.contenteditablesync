@@ -6,33 +6,72 @@
  * Licensed under the MIT license.
  */
 
-(function($) {
+(function($, window) {
 
-  // Collection method.
-  $.fn.contenteditablesync = function() {
-    return this.each(function(i) {
-      // Do something awesome to each selected element.
-      $(this).html('awesome' + i);
-    });
-  };
+    var ContenteditableSync = function(element) {
+        this.options = ContenteditableSync.DEFAULTS;
+        this.init(element);
+    };
 
-  // Static method.
-  $.contenteditablesync = function(options) {
-    // Override default options with passed-in options.
-    options = $.extend({}, $.contenteditablesync.options, options);
-    // Return something awesome.
-    return 'awesome' + options.punctuation;
-  };
 
-  // Static method default options.
-  $.contenteditablesync.options = {
-    punctuation: '.'
-  };
+    ContenteditableSync.prototype.init = function(element) {
+        this.$element = $(element);
+        this.$target = this.$element.data('target');
+        if(!this.$target) {
+            this.$target = this.$element.prev();
+        }
 
-  // Custom selector.
-  $.expr[':'].contenteditablesync = function(elem) {
-    // Is this element awesome?
-    return $(elem).text().indexOf('awesome') !== -1;
-  };
+        this.timer = null;
+        var that = this;
+        this.value = this.$element.text();
 
-}(jQuery));
+        this.$element.on('focus', function() {
+            that.watch();
+        });
+
+        this.$element.on('blur', function() {
+            window.clearInterval(that.timer);
+            that.timer = null;
+            that.sync();
+        });
+
+    };
+
+    ContenteditableSync.prototype.watch = function() {
+        if (this.timer) {
+            return false;
+        }
+        this.timer = window.setInterval($.proxy(this.sync, this), this.options.interval);
+    };
+
+
+    ContenteditableSync.prototype.sync = function() {
+        var newvalue = this.$element.text();
+        if (newvalue !== this.value) {
+            this.$target.text(newvalue).trigger('change.contenteditablesync');
+            this.value = newvalue;
+        }
+    };
+
+
+    ContenteditableSync.DEFAULTS = {
+        interval: 2000,
+    };
+
+    $.fn.contenteditablesync = function(option) {
+        return this.each(function(){
+            var $this = $(this),
+                data = $this.data('contenteditablesync');
+
+            if(!data){
+                $this.data('contenteditablesync', (data=new ContenteditableSync(this)));
+            }
+            if (typeof option === 'string') {
+                data[option]();
+            }
+        });
+    };
+
+    $.fn.contenteditablesync.Constructor = ContenteditableSync;
+
+})(jQuery, window);
