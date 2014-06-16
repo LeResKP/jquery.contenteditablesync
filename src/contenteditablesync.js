@@ -8,8 +8,8 @@
 
 (function($, window) {
 
-    var ContenteditableSync = function(element) {
-        this.options = ContenteditableSync.DEFAULTS;
+    var ContenteditableSync = function(element, options) {
+        this.options = $.extend({}, ContenteditableSync.DEFAULTS, options);
         this.init(element);
     };
 
@@ -61,10 +61,11 @@
     $.fn.contenteditablesync = function(option) {
         return this.each(function(){
             var $this = $(this),
-                data = $this.data('contenteditablesync');
+                data = $this.data('contenteditablesync'),
+                options = typeof option === 'object' && option;
 
             if(!data){
-                $this.data('contenteditablesync', (data=new ContenteditableSync(this)));
+                $this.data('contenteditablesync', (data=new ContenteditableSync(this, options)));
             }
             if (typeof option === 'string') {
                 data[option]();
