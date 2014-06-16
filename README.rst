@@ -1,8 +1,10 @@
-# Contenteditablesync
+Contenteditablesync
+===================
 
-The best jQuery plugin ever.
+Use this plugin to synchronize the contenteditable's text content to a target like a textarea.
 
-## Getting Started
+Getting Started
+---------------
 Download the [production version][min] or the [development version][max].
 
 [min]: https://raw.github.com/LeResKP/jquery.contenteditablesync/master/dist/contenteditablesync.min.js
@@ -15,16 +17,12 @@ In your web page:
 <script src="dist/contenteditablesync.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+  $('div[contenteditable]').contenteditablesync();
 });
 </script>
 ```
 
-## Documentation
-_(Coming soon)_
+Options
+-------
 
-## Examples
-_(Coming soon)_
-
-## Release History
-_(Nothing yet)_
+`interval`: The interval time in seconds between the checks of the content's change.
