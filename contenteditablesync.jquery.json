@@ -1,9 +1,10 @@
 {
   "name": "contenteditablesync",
-  "title": "Contenteditablesync",
-  "description": "The best jQuery plugin ever.",
+  "title": "Contenteditable Sync",
+  "description": "Synchronize the change of a contenteditable to a target like a textarea.",
   "version": "0.1.0",
   "homepage": "https://github.com/LeResKP/jquery.contenteditablesync",
+  "docs": "https://github.com/LeResKP/jquery.contenteditablesync",
   "author": {
     "name": "Aurélien Matouillot",
     "email": "a.matouillot@gmail.com"
