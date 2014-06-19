@@ -1,1 +1,24 @@
-My GitHub Page
+<html>
+  <head>
+    <title>jQuery Contentedtable Sync</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="contenteditablesync.js"></script>
+    <script>
+      $(document).ready(function() {
+          $('div[contenteditable]').contenteditablesync();
+      });
+    </script>
+  </head>
+  <body>
+
+    The target:
+    <br />
+    <textarea id="textarea1"></textarea>
+    <br />
+    <br />
+    The div 'contenteditable' you can try to update:
+    <br />
+    <div contenteditable="true" data-target="#textarea1" style="width: 300px; min-height: 50px; border: 1px solid gray;"></div>
+
+  </body>
+</html>
