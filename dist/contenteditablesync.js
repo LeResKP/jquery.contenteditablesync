@@ -1,4 +1,4 @@
-/*! Contenteditable Sync - v0.1.0 - 2014-06-16
+/*! Contenteditable Sync - v0.1.0 - 2014-06-19
 * https://github.com/LeResKP/jquery.contenteditablesync
 * Copyright (c) 2014 Aurélien Matouillot; Licensed MIT */
 (function($, window) {
@@ -11,8 +11,11 @@
 
     ContenteditableSync.prototype.init = function(element) {
         this.$element = $(element);
-        this.$target = this.$element.data('target');
-        if(!this.$target) {
+        var target = this.$element.data('target');
+        if(target) {
+            this.$target = $(target);
+        }
+        else {
             this.$target = this.$element.prev();
         }
 

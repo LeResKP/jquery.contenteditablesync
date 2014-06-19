@@ -27,6 +27,19 @@
     equal($textarea.text(), 'Hello world', 'nothing was changed, also it doesn\'t trigger change event');
   });
 
+  test('The good target should be updated', function() {
+    expect(2);
+    var $div = $('<div />').appendTo('#qunit-fixture').data('target', '#textarea2');
+    var $textarea1 = $('<textarea />');
+    var $textarea2 = $('<textarea />').attr('id', 'textarea2');
+    $div.after($textarea1);
+    $div.after($textarea2);
+    $div.contenteditablesync();
+
+    $div.text('Hello world').contenteditablesync('sync');
+    equal($textarea1.text(), '', 'textarea1 should not be updated');
+    equal($textarea2.text(), 'Hello world', 'textarea2 should be updated');
+  });
 
   test('Should active the watch on focus', function() {
     var $div = $('<div />').appendTo('#qunit-fixture');

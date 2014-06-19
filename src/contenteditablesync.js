@@ -16,8 +16,11 @@
 
     ContenteditableSync.prototype.init = function(element) {
         this.$element = $(element);
-        this.$target = this.$element.data('target');
-        if(!this.$target) {
+        var target = this.$element.data('target');
+        if(target) {
+            this.$target = $(target);
+        }
+        else {
             this.$target = this.$element.prev();
         }
 
