@@ -71,6 +71,28 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
+    connect: {
+      server: {
+        options: {
+          port: 9999,
+          base: '.'
+        }
+      }
+    },
+    'saucelabs-qunit': {
+      all: {
+        options: {
+          build: process.env.TRAVIS_JOB_ID,
+          concurrency: 10,
+          urls: ['http://127.0.0.1:9999/test/contenteditablesync.html'],
+          browsers: [{
+                browserName: "firefox",
+                version: "19",
+                platform: "XP"
+          }]
+        }
+      }
+    },
   });
 
   // These plugins provide necessary tasks.
@@ -80,8 +102,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-saucelabs');
 
   // Default task.
   grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'concat', 'uglify']);
+  grunt.registerTask("test", ["connect", "saucelabs-qunit"]);
+  grunt.registerTask("dev", ["connect", "watch"]);
+
 
 };
