@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Contenteditablesync Test Suite</title>
+  <!-- Load local jQuery. This can be overridden with a ?jquery=___ param. -->
+  <script src="../libs/jquery-loader.js"></script>
+  <!-- Load local QUnit. -->
+  <link rel="stylesheet" href="../libs/qunit/qunit.css" media="screen">
+  <script src="../libs/qunit/qunit.js"></script>
+  <script>
+    var log = [];
+    var testName;
+
+    QUnit.done(function (test_results) {
+      var tests = [];
+      for(var i = 0, len = log.length; i < len; i++) {
+        var details = log[i];
+        tests.push({
+          name: details.name,
+          result: details.result,
+          expected: details.expected,
+          actual: details.actual,
+          source: details.source
+        });
+      }
+      test_results.tests = tests;
+
+      window.global_test_results = test_results;
+    });
+
+    QUnit.testStart(function(testDetails){
+      QUnit.log = function(details){
+        if (!details.result) {
+          details.name = testDetails.name;
+          log.push(details);
+        }
+      };
+    });
+  </script>
+  <!-- Load local lib and tests. -->
+  <script src="../src/contenteditablesync.js"></script>
+  <script src="contenteditablesync_test.js"></script>
+  <!-- Removing access to jQuery and $. But it'll still be available as _$, if
+       you REALLY want to mess around with jQuery in the console. REMEMBER WE
+       ARE TESTING A PLUGIN HERE, THIS HELPS ENSURE BEST PRACTICES. REALLY. -->
+  <script>window._$ = jQuery.noConflict(true);</script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture">
+    <span>lame test markup</span>
+    <span>normal test markup</span>
+    <span>awesome test markup</span>
+  </div>
+</body>
+</html>

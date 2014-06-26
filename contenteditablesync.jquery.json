@@ -1,0 +1,27 @@
+{
+  "name": "contenteditablesync",
+  "title": "Contenteditable Sync",
+  "description": "Synchronize the change of a contenteditable to a target like a textarea.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/LeResKP/jquery.contenteditablesync",
+  "docs": "https://github.com/LeResKP/jquery.contenteditablesync",
+  "author": {
+    "name": "Aurélien Matouillot",
+    "email": "a.matouillot@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/LeResKP/jquery.contenteditablesync.git"
+  },
+  "bugs": "https://github.com/LeResKP/jquery.contenteditablesync/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/LeResKP/jquery.contenteditablesync/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}
