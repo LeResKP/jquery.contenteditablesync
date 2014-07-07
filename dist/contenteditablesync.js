@@ -1,4 +1,4 @@
-/*! Contenteditable Sync - v0.1.0 - 2014-06-19
+/*! Contenteditable Sync - v0.1.1 - 2014-07-08
 * https://github.com/LeResKP/jquery.contenteditablesync
 * Copyright (c) 2014 Aurélien Matouillot; Licensed MIT */
 (function($, window) {
@@ -21,7 +21,7 @@
 
         this.timer = null;
         var that = this;
-        this.value = this.$element.text();
+        this.value = this.options.getContent(this.$element);
 
         this.$element.on('focus', function() {
             that.watch();
@@ -44,7 +44,7 @@
 
 
     ContenteditableSync.prototype.sync = function() {
-        var newvalue = this.$element.text();
+        var newvalue = this.options.getContent(this.$element);
         if (newvalue !== this.value) {
             this.$target.text(newvalue).trigger('change.contenteditablesync');
             this.value = newvalue;
@@ -54,6 +54,9 @@
 
     ContenteditableSync.DEFAULTS = {
         interval: 2000,
+        getContent: function($element) {
+            return $element.text();
+        }
     };
 
     $.fn.contenteditablesync = function(option) {
