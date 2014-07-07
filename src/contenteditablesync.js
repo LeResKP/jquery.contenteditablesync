@@ -26,7 +26,7 @@
 
         this.timer = null;
         var that = this;
-        this.value = this.$element.text();
+        this.value = this.options.getContent(this.$element);
 
         this.$element.on('focus', function() {
             that.watch();
@@ -49,7 +49,7 @@
 
 
     ContenteditableSync.prototype.sync = function() {
-        var newvalue = this.$element.text();
+        var newvalue = this.options.getContent(this.$element);
         if (newvalue !== this.value) {
             this.$target.text(newvalue).trigger('change.contenteditablesync');
             this.value = newvalue;
@@ -59,6 +59,9 @@
 
     ContenteditableSync.DEFAULTS = {
         interval: 2000,
+        getContent: function($element) {
+            return $element.text();
+        }
     };
 
     $.fn.contenteditablesync = function(option) {
