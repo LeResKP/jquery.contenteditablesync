@@ -83,4 +83,19 @@
     }, 800);
   });
 
+  test('Use getContent from options', function() {
+    expect(2);
+    var $div = $('<div />').appendTo('#qunit-fixture');
+    var $textarea = $('<textarea />').on('change.contenteditablesync', function(){
+        ok(true, 'Content as changed');
+    });
+    $div.before($textarea);
+    $div.contenteditablesync({getContent: function($element) {
+        return $element.text().replace('Hello', 'hello');
+    }});
+
+    $div.text('Hello world').contenteditablesync('sync');
+    equal($textarea.text(), 'hello world', 'target should be updated');
+  });
+
 }(jQuery));

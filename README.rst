@@ -33,3 +33,11 @@ Options
 -------
 
 `interval`: (default: 2000ms) The interval time in milliseconds between the checks of the content's change.
+`getContent`: function to get the content of the contenteditable. It's usefull if you want to make some updates before synchronizing it.
+
+The default options::
+
+    {
+        interval: 2000,
+        getContent: function($contenteditable) {return $contenteditable.text();}
+    }
