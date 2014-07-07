@@ -2,7 +2,7 @@
   "name": "contenteditablesync",
   "title": "Contenteditable Sync",
   "description": "Synchronize the change of a contenteditable to a target like a textarea.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/LeResKP/jquery.contenteditablesync",
   "docs": "https://github.com/LeResKP/jquery.contenteditablesync",
   "author": {
